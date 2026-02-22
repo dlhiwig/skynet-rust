@@ -1,5 +1,5 @@
 use crate::{Config, Result};
-use crate::core::message::{Message, Role};
+use crate::core::message::Message;
 use crate::providers::LLMProvider;
 use async_trait::async_trait;
 use std::sync::Arc;
@@ -73,7 +73,7 @@ impl SkynetAgent {
             // Check if we should continue running
             {
                 let running = self.running.read().await;
-                if !running {
+                if !*running {
                     break;
                 }
             }
